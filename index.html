@@ -120,6 +120,7 @@
       display: flex;
       flex-direction: column;
       justify-content: center;
+      align-items: center;
       padding: 6rem 3rem 3rem;
       position: relative;
       border-bottom: 1px solid var(--border);
@@ -131,6 +132,8 @@
       letter-spacing: 0.3em;
       margin-bottom: 1.5rem;
       animation: fadeIn 0.5s ease forwards;
+      max-width: 900px;
+      width: 100%;
     }
 
     .hero-top-label::before {
@@ -225,8 +228,10 @@
     .hero-main-row {
       display: flex;
       align-items: flex-start;
-      gap: 3rem;
+      gap: 2rem;
       flex-wrap: wrap;
+      max-width: 900px;
+      width: 100%;
     }
 
     .hero-left {
@@ -551,7 +556,7 @@
 </nav>
 
 <!-- HERO -->
-<section id="hero" style="max-width:100%; padding: 6rem 3rem 3rem; border-bottom: 1px solid var(--border);">
+<section id="hero" style="max-width:100%; padding: 6rem 3rem 3rem; border-bottom: 1px solid var(--border); width:100%;">
   <div class="hero-top-label">INITIALIZING PORTFOLIO... DONE</div>
 
   <div class="hero-main-row">
