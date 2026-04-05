@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>MIHIR NAIK // PORTFOLIO</title>
+  <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=VT323&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --bg: #0a0a0a;
+      --bg2: #0f0f0f;
+      --green: #00ff41;
+      --green-dim: #00aa2a;
+      --green-dark: #003311;
+      --text: #c8ffc8;
+      --text-dim: #5a9a5a;
+      --border: #1a3a1a;
+      --scanline: rgba(0, 255, 65, 0.03);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Share Tech Mono', monospace;
+      overflow-x: hidden;
+      cursor: crosshair;
+    }
+
+    /* SCANLINE OVERLAY */
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 2px,
+        var(--scanline) 2px,
+        var(--scanline) 4px
+      );
+      pointer-events: none;
+      z-index: 9999;
+    }
+
+    /* NOISE TEXTURE */
+    body::after {
+      content: '';
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 9998;
+      opacity: 0.4;
+    }
+
+    /* ── NAVBAR ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 1000;
+      border-bottom: 1px solid var(--border);
+      background: rgba(10,10,10,0.95);
+      backdrop-filter: blur(2px);
+      padding: 0 2rem;
+      height: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .nav-logo {
+      font-family: 'VT323', monospace;
+      font-size: 1.4rem;
+      color: var(--green);
+      letter-spacing: 0.1em;
+      text-decoration: none;
+    }
+
+    .nav-logo span {
+      color: var(--text-dim);
+    }
+
+    .nav-status {
+      font-size: 0.65rem;
+      color: var(--text-dim);
+      letter-spacing: 0.15em;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .blink-dot {
+      width: 6px; height: 6px;
+      background: var(--green);
+      border-radius: 50%;
+      animation: blink 1.2s step-end infinite;
+      display: inline-block;
+    }
+
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0; }
+    }
+
+    /* ── HERO ── */
+    #hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 6rem 3rem 3rem;
+      position: relative;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .hero-top-label {
+      font-size: 0.7rem;
+      color: var(--text-dim);
+      letter-spacing: 0.3em;
+      margin-bottom: 1.5rem;
+      animation: fadeIn 0.5s ease forwards;
+    }
+
+    .hero-top-label::before {
+      content: '> ';
+      color: var(--green);
+    }
+
+    .hero-name {
+      font-family: 'VT323', monospace;
+      font-size: clamp(5rem, 14vw, 12rem);
+      line-height: 0.9;
+      color: var(--green);
+      text-shadow: 0 0 40px rgba(0,255,65,0.3), 0 0 80px rgba(0,255,65,0.1);
+      letter-spacing: -0.02em;
+      animation: glitch 8s infinite;
+      position: relative;
+    }
+
+    @keyframes glitch {
+      0%, 94%, 100% { transform: translate(0); text-shadow: 0 0 40px rgba(0,255,65,0.3); }
+      95% { transform: translate(-2px, 1px); text-shadow: -2px 0 #ff0040, 2px 0 #00ffff; }
+      96% { transform: translate(2px, -1px); text-shadow: 2px 0 #ff0040, -2px 0 #00ffff; }
+      97% { transform: translate(0); }
+      98% { transform: translate(1px, 1px); text-shadow: -1px 0 #ff0040; }
+    }
+
+    .hero-sub {
+      margin-top: 2rem;
+      font-size: 0.95rem;
+      color: var(--text-dim);
+      letter-spacing: 0.1em;
+      max-width: 500px;
+      line-height: 1.8;
+      animation: fadeIn 0.8s ease 0.3s both;
+    }
+
+    .hero-sub .typed-cursor {
+      color: var(--green);
+      animation: blink 1s step-end infinite;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 1rem;
+      margin-top: 3rem;
+      flex-wrap: wrap;
+      animation: fadeIn 0.8s ease 0.6s both;
+    }
+
+    .btn {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 0.8rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      text-decoration: none;
+      padding: 0.75rem 2rem;
+      border: 1px solid var(--green-dim);
+      color: var(--green);
+      background: transparent;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+      transition: color 0.2s, border-color 0.2s;
+      clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
+    }
+
+    .btn::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: var(--green);
+      transform: translateX(-101%);
+      transition: transform 0.25s ease;
+      z-index: -1;
+    }
+
+    .btn:hover {
+      color: var(--bg);
+      border-color: var(--green);
+    }
+
+    .btn:hover::before {
+      transform: translateX(0);
+    }
+
+    .btn.primary {
+      background: var(--green-dark);
+      border-color: var(--green);
+    }
+
+    /* HERO LAYOUT */
+    .hero-main-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 3rem;
+      flex-wrap: wrap;
+    }
+
+    .hero-left {
+      flex: 1;
+      min-width: 280px;
+    }
+
+    /* PHOTO FRAME */
+    .hero-photo-frame {
+      width: 180px;
+      height: 220px;
+      border: 1px solid var(--green-dim);
+      position: relative;
+      flex-shrink: 0;
+      background: var(--bg2);
+      overflow: hidden;
+      cursor: crosshair;
+      margin-top: 0.5rem;
+    }
+
+    .hero-photo-frame::before {
+      content: 'CLASSIFIED';
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'VT323', monospace;
+      font-size: 1.2rem;
+      color: var(--green-dim);
+      letter-spacing: 0.3em;
+      z-index: 2;
+      transition: opacity 0.3s;
+      background: var(--bg2);
+    }
+
+    .hero-photo-frame::after {
+      content: '';
+      position: absolute;
+      top: 4px; left: 4px; right: 4px; bottom: 4px;
+      border: 1px dashed var(--border);
+      z-index: 3;
+      pointer-events: none;
+      transition: opacity 0.3s;
+    }
+
+    .hero-photo-frame:hover::before {
+      opacity: 0;
+    }
+
+    .hero-photo-frame img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      filter: grayscale(30%) contrast(1.1);
+      opacity: 0;
+      transition: opacity 0.4s ease;
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+    }
+
+    .hero-photo-frame:hover img {
+      opacity: 1;
+    }
+
+    .photo-corner {
+      position: absolute;
+      width: 10px; height: 10px;
+      z-index: 4;
+      pointer-events: none;
+    }
+    .photo-corner.tl { top: 0; left: 0; border-top: 2px solid var(--green); border-left: 2px solid var(--green); }
+    .photo-corner.tr { top: 0; right: 0; border-top: 2px solid var(--green); border-right: 2px solid var(--green); }
+    .photo-corner.bl { bottom: 0; left: 0; border-bottom: 2px solid var(--green); border-left: 2px solid var(--green); }
+    .photo-corner.br { bottom: 0; right: 0; border-bottom: 2px solid var(--green); border-right: 2px solid var(--green); }
+
+    .photo-label {
+      position: absolute;
+      bottom: -1.4rem;
+      left: 0;
+      font-size: 0.55rem;
+      color: var(--text-dim);
+      letter-spacing: 0.2em;
+    }
+
+    /* HERO SIDE DECORATION */
+    .hero-grid {
+      position: absolute;
+      right: 3rem;
+      top: 50%;
+      transform: translateY(-50%);
+      opacity: 0.06;
+      font-size: 0.6rem;
+      color: var(--green);
+      line-height: 1.4;
+      letter-spacing: 0.05em;
+      pointer-events: none;
+      user-select: none;
+    }
+
+    /* ── SECTIONS ── */
+    section {
+      padding: 5rem 3rem;
+      border-bottom: 1px solid var(--border);
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .section-label {
+      font-size: 0.65rem;
+      color: var(--text-dim);
+      letter-spacing: 0.4em;
+      text-transform: uppercase;
+      margin-bottom: 0.5rem;
+    }
+
+    .section-label::before {
+      content: '// ';
+      color: var(--green-dim);
+    }
+
+    .section-title {
+      font-family: 'VT323', monospace;
+      font-size: 3rem;
+      color: var(--green);
+      margin-bottom: 2.5rem;
+      letter-spacing: 0.05em;
+    }
+
+    /* ── PROJECTS ── */
+    .project-card {
+      border: 1px solid var(--border);
+      padding: 1.5rem;
+      margin-bottom: 1rem;
+      position: relative;
+      transition: border-color 0.2s, background 0.2s;
+      background: var(--bg2);
+    }
+
+    .project-card::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 2px;
+      background: var(--green-dim);
+      transform: scaleY(0);
+      transition: transform 0.2s;
+      transform-origin: bottom;
+    }
+
+    .project-card:hover {
+      border-color: var(--green-dim);
+      background: #0d1a0d;
+    }
+
+    .project-card:hover::before {
+      transform: scaleY(1);
+    }
+
+    .project-num {
+      font-size: 0.6rem;
+      color: var(--green-dim);
+      letter-spacing: 0.3em;
+      margin-bottom: 0.4rem;
+    }
+
+    .project-name {
+      font-family: 'VT323', monospace;
+      font-size: 1.6rem;
+      color: var(--text);
+      margin-bottom: 0.5rem;
+      letter-spacing: 0.05em;
+    }
+
+    .project-desc {
+      font-size: 0.8rem;
+      color: var(--text-dim);
+      line-height: 1.7;
+    }
+
+    .project-tags {
+      margin-top: 1rem;
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+
+    .tag {
+      font-size: 0.6rem;
+      letter-spacing: 0.15em;
+      padding: 0.2rem 0.6rem;
+      border: 1px solid var(--green-dark);
+      color: var(--green-dim);
+      background: var(--green-dark);
+    }
+
+    /* ── WORK ── */
+    .work-item {
+      display: grid;
+      grid-template-columns: 120px 1fr;
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+      padding-bottom: 2rem;
+      border-bottom: 1px dashed var(--border);
+    }
+
+    .work-item:last-child {
+      border-bottom: none;
+    }
+
+    .work-date {
+      font-size: 0.65rem;
+      color: var(--green-dim);
+      letter-spacing: 0.1em;
+      padding-top: 0.2rem;
+    }
+
+    .work-title {
+      font-family: 'VT323', monospace;
+      font-size: 1.5rem;
+      color: var(--text);
+      letter-spacing: 0.05em;
+      margin-bottom: 0.3rem;
+    }
+
+    .work-org {
+      font-size: 0.7rem;
+      color: var(--green-dim);
+      letter-spacing: 0.15em;
+      margin-bottom: 0.5rem;
+    }
+
+    .work-desc {
+      font-size: 0.78rem;
+      color: var(--text-dim);
+      line-height: 1.7;
+    }
+
+    /* ── CONTACT ── */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+
+    .contact-link {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 1rem 1.2rem;
+      border: 1px solid var(--border);
+      text-decoration: none;
+      color: var(--text-dim);
+      background: var(--bg2);
+      font-size: 0.78rem;
+      letter-spacing: 0.1em;
+      transition: border-color 0.2s, color 0.2s, background 0.2s;
+    }
+
+    .contact-link:hover {
+      border-color: var(--green-dim);
+      color: var(--green);
+      background: #0d1a0d;
+    }
+
+    .contact-link-icon {
+      font-size: 1.2rem;
+      color: var(--green-dim);
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      padding: 2rem 3rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.65rem;
+      color: var(--text-dim);
+      letter-spacing: 0.1em;
+      border-top: 1px solid var(--border);
+    }
+
+    footer span {
+      color: var(--green-dim);
+    }
+
+    .hero-bio {
+      margin-top: 1.2rem;
+      font-size: 0.78rem;
+      color: var(--text-dim);
+      line-height: 1.9;
+      max-width: 520px;
+      letter-spacing: 0.04em;
+      animation: fadeIn 0.8s ease 0.5s both;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 600px) {
+      .contact-grid { grid-template-columns: 1fr; }
+      .work-item { grid-template-columns: 1fr; gap: 0.3rem; }
+      .hero-grid { display: none; }
+      section { padding: 3rem 1.5rem; }
+      #hero { padding: 5rem 1.5rem 2rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#hero" class="nav-logo">MN<span>.exe</span></a>
+  <div class="nav-status">
+    <span class="blink-dot"></span>
+    AVAILABLE FOR HIRE // SU2026
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="hero" style="max-width:100%; padding: 6rem 3rem 3rem; border-bottom: 1px solid var(--border);">
+  <div class="hero-top-label">INITIALIZING PORTFOLIO... DONE</div>
+
+  <div class="hero-main-row">
+    <!-- LEFT: name + tagline + bio + buttons -->
+    <div class="hero-left">
+      <h1 class="hero-name">MIHIR<br/>NAIK</h1>
+      <p style="margin-top: 1rem; font-size: 1rem; color: var(--green-dim); letter-spacing: 0.12em; font-family: 'VT323', monospace;">
+        GET TO KNOW ME &mdash; IF YOU DARE.<span class="typed-cursor">_</span>
+      </p>
+      <p class="hero-sub" style="margin-top: 1.2rem;">
+        CS @ Stony Brook &nbsp;//&nbsp; Cybersecurity Focus<br/>
+        Security Researcher &nbsp;//&nbsp; Builder of things that shouldn't exist
+      </p>
+      <p class="hero-bio">
+        I'm a Computer Science student at Stony Brook University specializing in cybersecurity, graduating December 2026. I spend my time breaking things, researching how to fix them, and occasionally teaching others how to do both. Currently building LLM-powered pipelines to classify CVEs under Prof. Polychronakis — because someone has to. When I'm not in the lab, I'm an RA keeping the dorms from descending into chaos.
+      </p>
+      <div class="hero-buttons">
+        <a href="#projects" class="btn primary" onclick="smoothScroll(event,'projects')">[ Projects ]</a>
+        <a href="#work" class="btn" onclick="smoothScroll(event,'work')">[ Work ]</a>
+        <a href="#contact" class="btn" onclick="smoothScroll(event,'contact')">[ Contact ]</a>
+      </div>
+    </div>
+
+    <!-- RIGHT: photo frame -->
+    <div style="position:relative; padding-bottom: 1.5rem;">
+      <div class="hero-photo-frame">
+        <span class="photo-corner tl"></span>
+        <span class="photo-corner tr"></span>
+        <span class="photo-corner bl"></span>
+        <span class="photo-corner br"></span>
+        <!-- Replace src with your actual photo path e.g. "photo.jpg" -->
+        <img src="photo.jpg" alt="Mihir Naik" />
+      </div>
+      <div class="photo-label">// HOVER TO REVEAL</div>
+    </div>
+  </div>
+
+  <div class="hero-grid">
+    01001101 01001001 01001000 01001001 01010010<br/>
+    10110100 00110010 10011010 01110001 00101100<br/>
+    01001110 01000001 01001001 01001011 00100000<br/>
+    11001010 00011011 10100011 01100101 10010110<br/>
+    01010011 01000101 01000011 01010101 01010010<br/>
+    10101010 11001100 01010101 10101010 11001100<br/>
+    01001001 01010100 01011001 00100000 00110010<br/>
+    00110000 00110010 00110110 00000000 11111111
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="section-label">module_02</div>
+  <h2 class="section-title">PROJECTS</h2>
+
+  <div class="project-card">
+    <div class="project-num">PROJECT_01 //</div>
+    <div class="project-name">ARGUS — PASSIVE NETWORK SNIFFER</div>
+    <div class="project-desc">A passive network traffic analyzer built in Python using Scapy. Captures and classifies TCP, UDP, ICMP, ARP, and DNS packets in real time with a live terminal dashboard.</div>
+    <div class="project-tags">
+      <span class="tag">PYTHON</span><span class="tag">SCAPY</span><span class="tag">NETWORK SECURITY</span>
+    </div>
+  </div>
+
+  <div class="project-card">
+    <div class="project-num">PROJECT_02 //</div>
+    <div class="project-name">TCPSCAN — TCP SYN SCANNER</div>
+    <div class="project-desc">Custom TCP SYN port scanner with service fingerprinting. Built from scratch using raw sockets and Scapy, capable of identifying open ports and banners without completing the full handshake.</div>
+    <div class="project-tags">
+      <span class="tag">PYTHON</span><span class="tag">SCAPY</span><span class="tag">OFFENSIVE SECURITY</span>
+    </div>
+  </div>
+
+  <div class="project-card">
+    <div class="project-num">PROJECT_03 //</div>
+    <div class="project-name">SECURE PASSWORD VAULT</div>
+    <div class="project-desc">End-to-end encrypted password manager using AES-256-GCM and PBKDF2 key derivation. Zero plaintext storage — all credentials encrypted at rest.</div>
+    <div class="project-tags">
+      <span class="tag">PYTHON</span><span class="tag">AES-256-GCM</span><span class="tag">CRYPTOGRAPHY</span>
+    </div>
+  </div>
+
+  <div class="project-card">
+    <div class="project-num">PROJECT_04 //</div>
+    <div class="project-name">LLM-BASED CVE CLASSIFIER</div>
+    <div class="project-desc">Automated pipeline for classifying Common Vulnerabilities and Exposures using large language models. Built under Professor Michalis Polychronakis as part of undergraduate security research.</div>
+    <div class="project-tags">
+      <span class="tag">LLMs</span><span class="tag">PYTHON</span><span class="tag">RESEARCH</span><span class="tag">CVE</span>
+    </div>
+  </div>
+</section>
+
+<!-- WORK -->
+<section id="work">
+  <div class="section-label">module_03</div>
+  <h2 class="section-title">WORK</h2>
+
+  <div class="work-item">
+    <div class="work-date">2024 —<br/>PRESENT</div>
+    <div>
+      <div class="work-title">UNDERGRAD SECURITY RESEARCH ASSISTANT</div>
+      <div class="work-org">// STONY BROOK UNIVERSITY — PROF. POLYCHRONAKIS</div>
+      <div class="work-desc">Building automated pipelines to classify CVEs using LLMs. Research focuses on vulnerability intelligence and security automation.</div>
+    </div>
+  </div>
+
+  <div class="work-item">
+    <div class="work-date">2024 —<br/>PRESENT</div>
+    <div>
+      <div class="work-title">TEACHING ASSISTANT — CSE 114</div>
+      <div class="work-org">// STONY BROOK UNIVERSITY</div>
+      <div class="work-desc">TA for Introduction to Object-Oriented Programming. Supporting students with coursework, labs, and debugging sessions.</div>
+    </div>
+  </div>
+
+  <div class="work-item">
+    <div class="work-date">2023 —<br/>PRESENT</div>
+    <div>
+      <div class="work-title">RESIDENT ADVISOR</div>
+      <div class="work-org">// STONY BROOK UNIVERSITY</div>
+      <div class="work-desc">Serving as an RA on campus — community building, conflict resolution, and supporting student well-being in residential life.</div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-label">module_04</div>
+  <h2 class="section-title">CONTACT</h2>
+  <p style="font-size:0.8rem; color: var(--text-dim); margin-bottom: 2rem; line-height:1.8;">
+    Currently seeking cybersecurity internships for Summer 2026.<br/>
+    Open to research collaborations, security projects, and interesting problems.
+  </p>
+  <div class="contact-grid">
+    <a href="/cdn-cgi/l/email-protection#651c0a1017250008040c094b060a08" class="contact-link">
+      <span class="contact-link-icon">[✉]</span> EMAIL
+    </a>
+    <a href="https://linkedin.com/in/yourprofile" target="_blank" class="contact-link">
+      <span class="contact-link-icon">[in]</span> LINKEDIN
+    </a>
+    <a href="https://github.com/yourusername" target="_blank" class="contact-link">
+      <span class="contact-link-icon">[gh]</span> GITHUB
+    </a>
+    <a href="#" class="contact-link">
+      <span class="contact-link-icon">[dl]</span> RESUME.PDF
+    </a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div>MIHIR NAIK &copy; 2026 // ALL RIGHTS RESERVED</div>
+  <div>BUILT WITH <span>RAW HTML</span> // NO FRAMEWORKS</div>
+</footer>
+
+<script>
+  function smoothScroll(e, id) {
+    e.preventDefault();
+    const target = document.getElementById(id);
+    if (target) {
+      const offset = 60;
+      const top = target.getBoundingClientRect().top + window.scrollY - offset;
+      window.scrollTo({ top, behavior: 'smooth' });
+    }
+  }
+</script>
+</body>
+</html>
