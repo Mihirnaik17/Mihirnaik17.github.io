@@ -472,6 +472,56 @@
       line-height: 1.7;
     }
 
+
+    /* ── SKILLS ── */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .skills-category {
+      border: 1px solid var(--border);
+      padding: 1.2rem;
+      background: var(--bg2);
+      transition: border-color 0.2s;
+    }
+
+    .skills-category:hover {
+      border-color: var(--green-dim);
+    }
+
+    .skills-cat-title {
+      font-family: 'VT323', monospace;
+      font-size: 1.2rem;
+      color: var(--green);
+      letter-spacing: 0.1em;
+      margin-bottom: 0.8rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px dashed var(--border);
+    }
+
+    .skills-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+    }
+
+    .skill-item {
+      font-size: 0.65rem;
+      letter-spacing: 0.1em;
+      padding: 0.25rem 0.6rem;
+      border: 1px solid var(--green-dark);
+      color: var(--text-dim);
+      background: var(--green-dark);
+      transition: color 0.2s, border-color 0.2s;
+    }
+
+    .skill-item:hover {
+      color: var(--green);
+      border-color: var(--green-dim);
+    }
+
     /* ── CONTACT ── */
     .contact-grid {
       display: grid;
@@ -571,14 +621,12 @@
         Security Researcher &nbsp;//&nbsp; Builder of things that shouldn't exist
       </p>
       <p class="hero-bio">
-        I love dismantling things to see how they work and put them back together. I started with RC cars, moved on to laptops, 
-        and now I break and analyze code and security protocols—breaking things has never been this interesting. When I started CS, I thought it did not suit me, but security classes hooked me, 
-        because I can use my skills and knowledge to break, create, and fix things in an interesting way. I then took more security classes and started doing research. I want to further my studies, dive deeper into the 
-        field, gain industry experience, and contribute to something meaningful.
+        I'm a Computer Science student at Stony Brook University specializing in cybersecurity, graduating December 2026. I spend my time breaking things, researching how to fix them, and occasionally teaching others how to do both. Currently building LLM-powered pipelines to classify CVEs under Prof. Polychronakis — because someone has to. When I'm not in the lab, I'm an RA keeping the dorms from descending into chaos.
       </p>
       <div class="hero-buttons">
         <a href="#projects" class="btn primary" onclick="smoothScroll(event,'projects')">[ Projects ]</a>
         <a href="#work" class="btn" onclick="smoothScroll(event,'work')">[ Work ]</a>
+        <a href="#skills" class="btn" onclick="smoothScroll(event,'skills')">[ Skills ]</a>
         <a href="#contact" class="btn" onclick="smoothScroll(event,'contact')">[ Contact ]</a>
       </div>
     </div>
@@ -591,7 +639,7 @@
         <span class="photo-corner bl"></span>
         <span class="photo-corner br"></span>
         <!-- Replace src with your actual photo path e.g. "photo.jpg" -->
-        <img src="mihir.naik@stonybrook.edu-9e79c18f.jpg" alt="Mihir Naik" />
+        <img src="photo.jpg" alt="Mihir Naik" />
       </div>
       <div class="photo-label">// HOVER TO REVEAL</div>
     </div>
@@ -616,37 +664,28 @@
 
   <div class="project-card">
     <div class="project-num">PROJECT_01 //</div>
-    <div class="project-name">ARGUS — PASSIVE NETWORK SNIFFER</div>
-    <div class="project-desc">A passive network traffic analyzer built in Python using Scapy. Captures and classifies TCP, UDP, ICMP, ARP, and DNS packets in real time with a live terminal dashboard.</div>
+    <div class="project-name">&#x1F50D; ARGUS — PASSIVE NETWORK TRAFFIC ANALYZER</div>
+    <div class="project-desc">Built a passive network sniffer on Kali Linux using Scapy with port-agnostic protocol detection for DNS, HTTP, and TLS traffic. Engineered dissection logic to extract DNS query names, HTTP methods/URIs, and TLS SNI fields from raw packet captures. Operates in promiscuous mode — captures and classifies live traffic without injecting packets.</div>
     <div class="project-tags">
-      <span class="tag">PYTHON</span><span class="tag">SCAPY</span><span class="tag">NETWORK SECURITY</span>
+      <span class="tag">PYTHON</span><span class="tag">SCAPY</span><span class="tag">KALI LINUX</span><span class="tag">NETWORK SECURITY</span>
     </div>
   </div>
 
   <div class="project-card">
     <div class="project-num">PROJECT_02 //</div>
-    <div class="project-name">TCPSCAN — TCP SYN SCANNER</div>
-    <div class="project-desc">Custom TCP SYN port scanner with service fingerprinting. Built from scratch using raw sockets and Scapy, capable of identifying open ports and banners without completing the full handshake.</div>
+    <div class="project-name">&#x1F512; SECURE PASSWORD VAULT</div>
+    <div class="project-desc">Encrypted password manager using AES-256-GCM authenticated encryption for confidentiality and integrity of stored credentials. Keys derived from a master password via PBKDF2 with random salt — protecting against brute-force attacks. Per-entry nonces prevent IV reuse across encryption operations.</div>
     <div class="project-tags">
-      <span class="tag">PYTHON</span><span class="tag">SCAPY</span><span class="tag">OFFENSIVE SECURITY</span>
+      <span class="tag">PYTHON</span><span class="tag">AES-256-GCM</span><span class="tag">PBKDF2</span><span class="tag">CRYPTOGRAPHY</span>
     </div>
   </div>
 
   <div class="project-card">
     <div class="project-num">PROJECT_03 //</div>
-    <div class="project-name">SECURE PASSWORD VAULT</div>
-    <div class="project-desc">End-to-end encrypted password manager using AES-256-GCM and PBKDF2 key derivation. Zero plaintext storage — all credentials encrypted at rest.</div>
+    <div class="project-name">&#x1F6E1; SECURE WEB APP DEPLOYMENT & VULNERABILITY REMEDIATION</div>
+    <div class="project-desc">Deployed and hardened a production web server on Ubuntu Linux with Apache, MySQL, and PHP. Implemented TLS/SSL via Let's Encrypt and remediated OWASP Top 10 vulnerabilities — XSS, SQL injection, and CSRF. Configured fail2ban with iptables to block brute-force SSH attacks with automatic IP bans.</div>
     <div class="project-tags">
-      <span class="tag">PYTHON</span><span class="tag">AES-256-GCM</span><span class="tag">CRYPTOGRAPHY</span>
-    </div>
-  </div>
-
-  <div class="project-card">
-    <div class="project-num">PROJECT_04 //</div>
-    <div class="project-name">LLM-BASED CVE CLASSIFIER</div>
-    <div class="project-desc">Automated pipeline for classifying Common Vulnerabilities and Exposures using large language models. Built under Professor Michalis Polychronakis as part of undergraduate security research.</div>
-    <div class="project-tags">
-      <span class="tag">LLMs</span><span class="tag">PYTHON</span><span class="tag">RESEARCH</span><span class="tag">CVE</span>
+      <span class="tag">APACHE</span><span class="tag">PHP</span><span class="tag">MYSQL</span><span class="tag">LINUX</span><span class="tag">OWASP</span><span class="tag">TLS/SSL</span>
     </div>
   </div>
 </section>
@@ -657,18 +696,27 @@
   <h2 class="section-title">WORK</h2>
 
   <div class="work-item">
-    <div class="work-date">2024 —<br/>PRESENT</div>
+    <div class="work-date">AUG 2025 —<br/>NOV 2025</div>
     <div>
-      <div class="work-title">UNDERGRAD SECURITY RESEARCH ASSISTANT</div>
-      <div class="work-org">// STONY BROOK UNIVERSITY — PROF. POLYCHRONAKIS</div>
-      <div class="work-desc">Building automated pipelines to classify CVEs using LLMs. Research focuses on vulnerability intelligence and security automation.</div>
+      <div class="work-title">&#x1F916; GENERATIVE AI ENGINEER INTERN</div>
+      <div class="work-org">// NEURALSEEK (REMOTE)</div>
+      <div class="work-desc">Built AI agent demos for customer service automation across healthcare, finance, and education using a RAG platform. Conducted alpha testing across 100+ queries and developed a Python evaluation framework using semantic similarity scoring and Jupyter visualizations to track performance regressions.</div>
+    </div>
+  </div>
+
+  <div class="work-item">
+    <div class="work-date">NOV 2024 —<br/>PRESENT</div>
+    <div>
+      <div class="work-title">&#x1F50E; UNDERGRADUATE SECURITY RESEARCH ASSISTANT</div>
+      <div class="work-org">// STONY BROOK UNIVERSITY — CSE DEPT.</div>
+      <div class="work-desc">Engineered a Python pipeline parsing compressed Debian repositories and CVE databases to extract configuration-dependent vulnerabilities. Developed a GPT-4 powered classification system with structured prompting and JSON schema validation to reduce false positives in vulnerability scanning. Working toward a publication-ready research paper.</div>
     </div>
   </div>
 
   <div class="work-item">
     <div class="work-date">2024 —<br/>PRESENT</div>
     <div>
-      <div class="work-title">TEACHING ASSISTANT — CSE 114</div>
+      <div class="work-title">&#x1F4DA; TEACHING ASSISTANT — CSE 114</div>
       <div class="work-org">// STONY BROOK UNIVERSITY</div>
       <div class="work-desc">TA for Introduction to Object-Oriented Programming. Supporting students with coursework, labs, and debugging sessions.</div>
     </div>
@@ -677,32 +725,111 @@
   <div class="work-item">
     <div class="work-date">2023 —<br/>PRESENT</div>
     <div>
-      <div class="work-title">RESIDENT ADVISOR</div>
+      <div class="work-title">&#x1F3E0; RESIDENT ADVISOR</div>
       <div class="work-org">// STONY BROOK UNIVERSITY</div>
-      <div class="work-desc">Serving as an RA on campus — community building, conflict resolution, and supporting student well-being in residential life.</div>
+      <div class="work-desc">Community building, conflict resolution, and supporting student well-being in residential life on campus.</div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-label">module_04</div>
+  <h2 class="section-title">SKILLS</h2>
+
+  <div class="skills-grid">
+    <div class="skills-category">
+      <div class="skills-cat-title">&#x1F4BB; LANGUAGES</div>
+      <div class="skills-list">
+        <span class="skill-item">Python</span>
+        <span class="skill-item">Java</span>
+        <span class="skill-item">JavaScript</span>
+        <span class="skill-item">TypeScript</span>
+        <span class="skill-item">C</span>
+        <span class="skill-item">C++</span>
+        <span class="skill-item">PHP</span>
+      </div>
+    </div>
+
+    <div class="skills-category">
+      <div class="skills-cat-title">&#x26A1; FRAMEWORKS</div>
+      <div class="skills-list">
+        <span class="skill-item">React</span>
+        <span class="skill-item">Node.js</span>
+        <span class="skill-item">Express</span>
+        <span class="skill-item">Spring Boot</span>
+        <span class="skill-item">OpenAI API</span>
+        <span class="skill-item">pandas</span>
+      </div>
+    </div>
+
+    <div class="skills-category">
+      <div class="skills-cat-title">&#x1F5C4; DATABASES</div>
+      <div class="skills-list">
+        <span class="skill-item">MongoDB</span>
+        <span class="skill-item">PostgreSQL</span>
+        <span class="skill-item">MySQL</span>
+        <span class="skill-item">SQL</span>
+      </div>
+    </div>
+
+    <div class="skills-category">
+      <div class="skills-cat-title">&#x1F6E1; SECURITY</div>
+      <div class="skills-list">
+        <span class="skill-item">CVE Analysis</span>
+        <span class="skill-item">OWASP Top 10</span>
+        <span class="skill-item">XSS/CSRF</span>
+        <span class="skill-item">TLS/SSL</span>
+        <span class="skill-item">AES-GCM</span>
+        <span class="skill-item">PKI/X.509</span>
+        <span class="skill-item">Network Sniffing</span>
+        <span class="skill-item">Packet Crafting</span>
+      </div>
+    </div>
+
+    <div class="skills-category">
+      <div class="skills-cat-title">&#x1F527; SECURITY TOOLS</div>
+      <div class="skills-list">
+        <span class="skill-item">Kali Linux</span>
+        <span class="skill-item">Nmap</span>
+        <span class="skill-item">Scapy</span>
+        <span class="skill-item">Wireshark</span>
+        <span class="skill-item">Burp Suite</span>
+      </div>
+    </div>
+
+    <div class="skills-category">
+      <div class="skills-cat-title">&#x1F4E6; TOOLS</div>
+      <div class="skills-list">
+        <span class="skill-item">Git</span>
+        <span class="skill-item">Linux</span>
+        <span class="skill-item">Apache</span>
+        <span class="skill-item">nginx</span>
+        <span class="skill-item">Jupyter</span>
+      </div>
     </div>
   </div>
 </section>
 
 <!-- CONTACT -->
 <section id="contact">
-  <div class="section-label">module_04</div>
+  <div class="section-label">module_05</div>
   <h2 class="section-title">CONTACT</h2>
   <p style="font-size:0.8rem; color: var(--text-dim); margin-bottom: 2rem; line-height:1.8;">
     Currently seeking cybersecurity internships for Summer 2026.<br/>
     Open to research collaborations, security projects, and interesting problems.
   </p>
   <div class="contact-grid">
-    <a href="mailto:mihir.naik@stonybrook.edu" class="contact-link">
+    <a href="/cdn-cgi/l/email-protection#651c0a1017250008040c094b060a08" class="contact-link">
       <span class="contact-link-icon">[✉]</span> EMAIL
     </a>
-    <a href="https://www.linkedin.com/in/mihir-hrishikesh-naik-nethavath-8b8869280/" target="_blank" class="contact-link">
+    <a href="https://linkedin.com/in/yourprofile" target="_blank" class="contact-link">
       <span class="contact-link-icon">[in]</span> LINKEDIN
     </a>
-    <a href="https://github.com/Mihirnaik17" target="_blank" class="contact-link">
+    <a href="https://github.com/yourusername" target="_blank" class="contact-link">
       <span class="contact-link-icon">[gh]</span> GITHUB
     </a>
-    <a href="MihirNaik.Secresume.pdf" target="_blank" class="contact-link">
+    <a href="#" class="contact-link">
       <span class="contact-link-icon">[dl]</span> RESUME.PDF
     </a>
   </div>
