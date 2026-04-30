@@ -312,6 +312,35 @@
       letter-spacing: 0.05em;
     }
 
+    /* PROJECT LINK ICON + TYPE BADGE */
+    .project-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.4rem;
+    }
+    .project-type-badge {
+      font-size: 0.55rem;
+      letter-spacing: 0.15em;
+      padding: 0.15rem 0.5rem;
+      border: 1px solid var(--green-dark);
+      color: var(--green-dim);
+    }
+    .project-type-badge.swe {
+      border-color: #002233;
+      color: #00aacc;
+    }
+    .project-link {
+      color: var(--green-dim);
+      opacity: 0.45;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      transition: opacity 0.2s, color 0.2s;
+      margin-left: 0.6rem;
+    }
+    .project-link:hover { opacity: 1; color: var(--green); }
+
     /* PROJECTS */
     .project-card {
       border: 1px solid var(--border);
@@ -456,15 +485,15 @@
         GET TO KNOW ME &mdash; IF YOU DARE.<span style="color:var(--green); animation: blink 1s step-end infinite; display:inline-block;">_</span>
       </p>
       <p class="hero-sub">
-        CS @ Stony Brook &nbsp;//&nbsp; Cybersecurity Focus<br/>
-        Security Researcher &nbsp;//&nbsp; Builder of things that shouldn't exist
+        CS @ Stony Brook &nbsp;//&nbsp; SWE + Cybersecurity<br/>
+        Full-Stack Developer &nbsp;//&nbsp; Security Researcher
       </p>
       <p class="hero-bio">
-        I love dismantling things to see how they work and put them back together. I started with RC cars, moved on to laptops,
-        and now I break and analyze code and security protocols. Breaking things has never been this interesting. When I started CS,
-        I thought it did not suit me, but security classes hooked me, because I can use my skills and knowledge to break, create,
-        and fix things in the most interesting way. I then took more security classes and started doing research. I want to further
-        my studies, dive deeper into the field, gain industry experience, and contribute to something meaningful.
+        I love dismantling things to see how they work — and building things worth protecting. I started with RC cars, moved on to
+        laptops, and now I write full-stack applications and break security protocols. Security hooked me because it sits at the
+        intersection of engineering and adversarial thinking: you have to build well and think like an attacker simultaneously.
+        I've shipped production apps, run vulnerability research pipelines, and analyzed systems from the exploit side. I want to
+        keep pushing at both ends — shipping meaningful software and securing the systems it runs on.
       </p>
       <div class="hero-buttons">
         <a href="#projects" class="btn primary" onclick="smoothScroll(event,'projects')">[ Projects ]</a>
@@ -504,29 +533,87 @@
   <h2 class="section-title">PROJECTS</h2>
 
   <div class="project-card">
-    <div class="project-num">PROJECT_01 //</div>
+    <div class="project-header">
+      <div class="project-num">PROJECT_01 //</div>
+      <div style="display:flex;align-items:center;gap:0.5rem;">
+        <span class="project-type-badge">CYBERSEC</span>
+        <a href="#" class="project-link" target="_blank" title="View Project">
+          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        </a>
+      </div>
+    </div>
     <div class="project-name">ARGUS — PASSIVE NETWORK TRAFFIC ANALYZER</div>
-    <div class="project-desc">Built a passive network sniffer on Kali Linux using Scapy with port-agnostic protocol detection for DNS, HTTP, and TLS traffic. Engineered dissection logic to extract DNS query names, HTTP methods/URIs, and TLS SNI fields from raw packet captures. Operates in promiscuous mode — captures and classifies live traffic without injecting packets.</div>
+    <div class="project-desc">Built a passive network sniffer on Kali Linux using Scapy with port-agnostic protocol detection for DNS, HTTP, and TLS traffic. Engineered dissection logic to extract DNS query names, HTTP methods/URIs, and TLS SNI fields from raw packet captures. Operates in promiscuous mode — captures and classifies live traffic without injecting packets or disrupting network sessions.</div>
     <div class="project-tags">
       <span class="tag">PYTHON</span><span class="tag">SCAPY</span><span class="tag">KALI LINUX</span><span class="tag">NETWORK SECURITY</span>
     </div>
   </div>
 
   <div class="project-card">
-    <div class="project-num">PROJECT_02 //</div>
+    <div class="project-header">
+      <div class="project-num">PROJECT_02 //</div>
+      <div style="display:flex;align-items:center;gap:0.5rem;">
+        <span class="project-type-badge">CYBERSEC</span>
+        <a href="#" class="project-link" target="_blank" title="View Project">
+          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        </a>
+      </div>
+    </div>
     <div class="project-name">SECURE PASSWORD VAULT</div>
-    <div class="project-desc">Encrypted password manager using AES-256-GCM authenticated encryption for confidentiality and integrity of stored credentials. Keys derived from a master password via PBKDF2 with random salt — protecting against brute-force attacks. Per-entry nonces prevent IV reuse across encryption operations.</div>
+    <div class="project-desc">Encrypted password manager using AES-256-GCM authenticated encryption for confidentiality and integrity of stored credentials. Keys derived from a master password via PBKDF2 with random salt — protecting against brute-force and dictionary attacks. Per-entry nonces prevent IV reuse across encryption operations, following cryptographic best practices for GCM mode.</div>
     <div class="project-tags">
       <span class="tag">PYTHON</span><span class="tag">AES-256-GCM</span><span class="tag">PBKDF2</span><span class="tag">CRYPTOGRAPHY</span>
     </div>
   </div>
 
   <div class="project-card">
-    <div class="project-num">PROJECT_03 //</div>
+    <div class="project-header">
+      <div class="project-num">PROJECT_03 //</div>
+      <div style="display:flex;align-items:center;gap:0.5rem;">
+        <span class="project-type-badge">CYBERSEC</span>
+        <a href="#" class="project-link" target="_blank" title="View Project">
+          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        </a>
+      </div>
+    </div>
     <div class="project-name">SECURE WEB APP DEPLOYMENT & VULNERABILITY REMEDIATION</div>
-    <div class="project-desc">Deployed and hardened a production web server on Ubuntu Linux with Apache, MySQL, and PHP. Implemented TLS/SSL via Let's Encrypt and remediated OWASP Top 10 vulnerabilities — XSS, SQL injection, and CSRF. Configured fail2ban with iptables to block brute-force SSH attacks with automatic IP bans.</div>
+    <div class="project-desc">Deployed and hardened a production web server on Ubuntu Linux with Apache, MySQL, and PHP. Implemented TLS/SSL via Let's Encrypt and remediated OWASP Top 10 vulnerabilities — XSS via output encoding, SQL injection via prepared statements, and CSRF via anti-CSRF tokens with SameSite cookies. Configured fail2ban with iptables to auto-ban IPs after 5 failed SSH attempts.</div>
     <div class="project-tags">
-      <span class="tag">APACHE</span><span class="tag">PHP</span><span class="tag">MYSQL</span><span class="tag">LINUX</span><span class="tag">OWASP</span><span class="tag">TLS/SSL</span>
+      <span class="tag">APACHE</span><span class="tag">PHP</span><span class="tag">MYSQL</span><span class="tag">LINUX</span><span class="tag">OWASP</span><span class="tag">TLS/SSL</span><span class="tag">FAIL2BAN</span>
+    </div>
+  </div>
+
+  <div class="project-card">
+    <div class="project-header">
+      <div class="project-num">PROJECT_04 //</div>
+      <div style="display:flex;align-items:center;gap:0.5rem;">
+        <span class="project-type-badge swe">SWE</span>
+        <a href="#" class="project-link" target="_blank" title="View Project">
+          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        </a>
+      </div>
+    </div>
+    <div class="project-name">PLAYLISTERYT — FULL-STACK PLAYLIST PLATFORM</div>
+    <div class="project-desc">Full-stack YouTube playlist management platform with AI-powered song recommendations. Users build personal libraries, share playlists publicly, and get Claude-powered suggestions based on mood, time of day, and listening history. Implemented Abstract Factory pattern for dual-database support (MongoDB/PostgreSQL), full undo/redo via jsTPS command pattern, and HTTP-only JWT cookies — eliminating the XSS token-theft vector common in tutorial apps. Deployed on Netlify + Render with MongoDB Atlas.</div>
+    <div class="project-tags">
+      <span class="tag">REACT</span><span class="tag">NODE.JS</span><span class="tag">EXPRESS</span><span class="tag">MONGODB</span><span class="tag">CLAUDE API</span><span class="tag">JWT</span><span class="tag">BCRYPT</span><span class="tag">MATERIAL UI</span>
+    </div>
+  </div>
+
+  <div class="project-card">
+    <div class="project-header">
+      <div class="project-num">PROJECT_05 //</div>
+      <div style="display:flex;align-items:center;gap:0.5rem;">
+        <span class="project-type-badge swe">SWE</span>
+        <a href="#" class="project-link" target="_blank" title="View Project">
+          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        </a>
+      </div>
+    </div>
+    <div class="project-name">VRA REDISTRICTING ANALYSIS TOOL</div>
+    <div class="project-desc">Research tool visualizing the statistical impact of VRA Section 2 on minority congressional representation. Generates 5,000+ random district plans per ensemble using MGGG's ReCom algorithm on Stony Brook's SeaWulf HPC cluster, comparing VRA-constrained vs. race-blind redistricting. Features D3.js visualizations (Gingles scatter plots, KDE curves, box-whisker ensembles), Leaflet choropleth precinct maps, and ecological inference analysis for Iowa and Louisiana.</div>
+    <div class="project-tags">
+      <span class="tag">REACT</span><span class="tag">TYPESCRIPT</span><span class="tag">SPRING BOOT</span><span class="tag">MONGODB</span><span class="tag">D3.JS</span><span class="tag">LEAFLET</span><span class="tag">TAILWIND</span><span class="tag">HPC/SEAWULF</span>
     </div>
   </div>
 </section>
@@ -599,9 +686,10 @@
         <span class="skill-item">Node.js</span>
         <span class="skill-item">Express</span>
         <span class="skill-item">Spring Boot</span>
-        <span class="skill-item">OpenAI API</span>
-        <span class="skill-item">pandas</span>
-        <span class="skill-item">Jupyter</span>
+        <span class="skill-item">D3.js</span>
+        <span class="skill-item">Leaflet</span>
+        <span class="skill-item">Tailwind CSS</span>
+        <span class="skill-item">Material UI</span>
       </div>
     </div>
 
@@ -642,6 +730,19 @@
     </div>
 
     <div class="skills-category">
+      <div class="skills-cat-title">AI / ML</div>
+      <div class="skills-list">
+        <span class="skill-item">Anthropic Claude API</span>
+        <span class="skill-item">OpenAI API</span>
+        <span class="skill-item">scikit-learn</span>
+        <span class="skill-item">RAG Platforms</span>
+        <span class="skill-item">Prompt Engineering</span>
+        <span class="skill-item">pandas</span>
+        <span class="skill-item">Jupyter</span>
+      </div>
+    </div>
+
+    <div class="skills-category">
       <div class="skills-cat-title">TOOLS</div>
       <div class="skills-list">
         <span class="skill-item">Git</span>
@@ -649,7 +750,9 @@
         <span class="skill-item">Apache</span>
         <span class="skill-item">nginx</span>
         <span class="skill-item">Docker</span>
-        <span class="skill-item">Microsoft Office</span>
+        <span class="skill-item">Maven</span>
+        <span class="skill-item">Vite</span>
+        <span class="skill-item">MongoDB Atlas</span>
       </div>
     </div>
 
@@ -661,8 +764,8 @@
   <div class="section-label">module_05</div>
   <h2 class="section-title">CONTACT</h2>
   <p style="font-size:0.8rem; color: var(--text-dim); margin-bottom: 2rem; line-height:1.8;">
-    Currently seeking cybersecurity internships for Summer 2026.<br/>
-    Open to research collaborations, security projects, and interesting problems.
+    Currently seeking SWE and cybersecurity internships for Summer 2026.<br/>
+    Open to research collaborations, full-stack projects, and security problems worth solving.
   </p>
   <div class="contact-grid">
     <a href="mailto:mihir.naik@stonybrook.edu" class="contact-link">
